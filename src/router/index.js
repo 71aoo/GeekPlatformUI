@@ -4,11 +4,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Layout',
-    component: () => import("../views/Layout.vue")
-  },
+  // {
+  //   path: '/',
+  //   name: 'Index',
+  //   component: () => import("../components/index/index.vue")
+  // },
   {
     path: '/',
     name: 'Layout',
@@ -69,6 +69,12 @@ const routes = [
         name: 'teamDetail',
         component: () => import("../views/team/teamDetail")
       },
+      {
+        path: '/logout',
+        name: 'logout',
+        component: () => import("../views/logout")
+
+      }
     ]
 
   }
@@ -77,5 +83,22 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+
+  if (to.path == '/login' || to.path == '/register' || to.path == '/users' || to.path == '/team' || to.path == '/') {
+    return next();
+  }
+
+  const tokenStr = window.sessionStorage.getItem('ISLOGIN');
+
+  if (!tokenStr) {
+
+    return next('/login')
+
+  }
+  next();
+
+});
 
 export default router

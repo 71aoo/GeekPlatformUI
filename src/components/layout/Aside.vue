@@ -25,7 +25,7 @@
           <span class="menu_text">{{ item.navItem }}</span>
         </el-menu-item>
       </el-submenu>
-      <el-submenu index="2" v-show="!isLogin">
+      <el-submenu index="2" v-show="!$store.state.isLogin">
         <template slot="title">
           <span class="menu_text_title">Login</span>
         </template>
@@ -33,7 +33,7 @@
           <span class="menu_text">{{ item.navItem }}</span>
         </el-menu-item>
       </el-submenu>
-      <el-submenu index="3" v-show="isLogin">
+      <el-submenu index="3" v-show="$store.state.isLogin">
         <template slot="title">
           <span class="menu_text_title">Challenge</span>
         </template>
@@ -46,7 +46,7 @@
           <span class="menu_text_count">{{ item.count }}</span>
         </el-menu-item>
       </el-submenu>
-      <el-submenu index="4" v-show="isLogin">
+      <el-submenu index="4" v-show="$store.state.isLogin">
         <template slot="title">
           <span class="menu_text_title">{{ userInfo.username }}</span>
         </template>
@@ -55,6 +55,14 @@
         </el-menu-item>
       </el-submenu>
     </el-menu>
+    <!-- <div class="qax-logo"> -->
+    <img
+      class="qax-logo"
+      style="max-width: 100%; vertical-align: bottom"
+      src="https://geekplateform.oss-cn-beijing.aliyuncs.com/qaxLogo.png"
+      alt=""
+    />
+    <!-- </div> -->
   </el-aside>
 </template>
 
@@ -135,8 +143,8 @@ export default {
             userInfo.teamId != 0 &&
             userInfo.teamId != "0"
           ) {
-            setInTeam(true);
-            console.log(response.data.team);
+            this.$store.commit("changeTeamState", true);
+
             setTeamInfo(response.data.team);
           }
         }
@@ -179,5 +187,30 @@ export default {
 }
 .menu_text_count {
   color: #403892;
+}
+
+.qax-logo {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* .qax-logo{
+  display:table-cell;   
+ 
+} */
+
+/* .qax-logo{
+  display: table-cell;   
+} */
+.qax-logo {
+  
+  position: absolute;
+  /* max-width: 10px; */
+  width: 280px;
+  top: 80%;
+  /* left: 10px; */
+  left: -10px;
+  /* bottom: 100px; */
+  
+
 }
 </style>

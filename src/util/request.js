@@ -37,6 +37,8 @@ Request.interceptors.response.use(
 
         let data = res.data;
 
+        if(data.status)
+
         return data;
 
     }, function (error) {
@@ -52,13 +54,15 @@ Request.interceptors.response.use(
         //     Router.push('/login')
         //   }
 
-        removeIsLogin()
-        removeUserInfo()
-        removeTeamInfo()
-        removeInTeam()
+        // removeIsLogin()
+        // removeUserInfo()
+        // removeTeamInfo()
+        // removeInTeam()
         
 
-        Router.push('/login')
+        // Router.push('/login')
+
+    
 
         return Promise.reject(error);
     }

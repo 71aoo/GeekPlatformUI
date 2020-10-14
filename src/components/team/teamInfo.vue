@@ -140,8 +140,11 @@ export default {
 
     getInTeamInfo() {
       let inTeam = getInTeam();
+
       if (inTeam == null || inTeam == false) {
+
         this.isInTeam = false;
+        
       } else {
         getMyTeamInfo().then((res) => {
           if (res.status == 200) {

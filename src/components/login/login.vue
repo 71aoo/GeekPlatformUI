@@ -79,13 +79,13 @@ export default {
         if (valid) {
           Request.post("/login", this.loginForm)
             .then((res) => {
+              console.log(res)
               if (res.status == 200) {
+                this.$store.commit("changeLoginState", true);
 
-                setIsLogin(true);
                 this.$router.go(0);
-
+                // this.$router.push('/announcements',1);
               } else {
-
                 this.$notify.error({
                   title: "用户名或密码错误",
                   message: "",

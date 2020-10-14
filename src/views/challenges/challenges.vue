@@ -44,10 +44,13 @@ export default {
       answerShow: false,
     };
   },
-
   //监听路由是否变化
   watch: {
     $route(to, from) {
+
+      console.log(to)
+      console.log(from)
+
       if (
         getInTeam() != null &&
         getInTeam() != false &&

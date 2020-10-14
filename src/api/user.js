@@ -51,3 +51,21 @@ export function sendCode(data) {
     })
 }
 
+// 更改用户信息
+export function changeUserInfo(data) {
+    return Request.request({
+        method: "post",
+        url: "/user/update",
+        data
+    })
+}
+
+export function Logout() {
+    return Request.request({
+        method: "get",
+        url: "/logout",
+    })
+}
+
+
+
