@@ -9,6 +9,7 @@
           :teamInfo="teamInfo"
           :userInfo="userInfo"
           :color = "'#181626'"
+          v-on:reGetChallenge="getChallenges"
         ></Challenge>
         
         <Challenge v-else
@@ -25,6 +26,7 @@
 
 <script>
 import Challenge from "../../components/challenge/challenge";
+// import Challenge from ''
 import { getChallengesByCategory } from "../../api/challenge";
 import {
   getInTeam,
@@ -71,18 +73,21 @@ export default {
       this.userInfo = getUserInfo();
       this.teamInfo = getTeamInfo();
       this.answerShow = true;
-      this.getChallenges(this.$route.params.id);
+      this.getChallenges();
     }
   },
 
   methods: {
-    getChallenges(id) {
+    getChallenges() {
+      let id = this.$route.params.id
       getChallengesByCategory(id).then((res) => {
         if (res.status == 200) {
           this.challenges = res.data;
+          console.log(res.data)
         }
       });
     },
+
   },
 };
 </script>

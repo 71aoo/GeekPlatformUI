@@ -3,7 +3,7 @@
     <div
       class="challenge-container"
       @click="a"
-      :style="'background-color:' + color + ';' "
+      :style="'background-color:' + color + ';'"
     >
       <div class="card-body">
         <div class="title">{{ challenge.name }}</div>
@@ -92,17 +92,21 @@ export default {
     userInfo: {
       type: Object,
       required: true,
-      default: {},
+      default: () => {
+        return {};
+      },
     },
     teamInfo: {
       type: Object,
       required: true,
-      default: {},
+      default: () => {
+        return {};
+      },
     },
     color: {
       type: String,
       required: true,
-      default: '#181626',
+      default: "#181626",
     },
   },
   data() {
@@ -128,8 +132,15 @@ export default {
     },
 
     flagSubmit() {
+      console.log("flag提交");
+      // console.log(this.challenge);
       if (this.flagForm.flag != null && this.flagForm.flag != "") {
-        SubmitFlag(this.flagForm).then((res) => {
+        let form = this.flagForm;
+        form.token = this.teamInfo.token
+        form.teamID = this.teamInfo.id
+        form.challengeID = this.challenge.id
+        console.log(form)
+        SubmitFlag(form).then((res) => {
           console.log(res);
           if (res.status == 200) {
             this.$notify({
@@ -137,13 +148,23 @@ export default {
               message: "Flag 正确",
               type: "success",
             });
-            this.$router.go(0);
+          this.dialogVisible = false;
+          this.$emit('reGetChallenge');
+            // setTimeout(()=>{
+            //   // this.$router.go(0);
+            //   this.$emit('reGetChallenge');
+            // }, 500)
           } else {
             this.$notify.error({
               title: "错误",
               message: res.msg,
             });
           }
+        });
+      } else {
+        this.$notify.error({
+          title: "Flag不为空",
+          message: "",
         });
       }
     },

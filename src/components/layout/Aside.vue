@@ -15,6 +15,7 @@
       active-text-color="#ffd04b"
       @open="handleOpen"
       @close="handleClose"
+      unique-opened
       router
     >
       <el-submenu index="1">

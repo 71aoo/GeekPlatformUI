@@ -1,6 +1,7 @@
 <template>
   <div class="an_container">
     <p class="title">Announcements</p>
+    
     <el-timeline>
       <el-timeline-item
         v-for="(a, i) in announcements"
@@ -53,6 +54,7 @@ export default {
 .an_container {
   margin: auto;
   width: 50%;
+  text-align: center
 }
 
 .title {
@@ -62,8 +64,7 @@ export default {
   margin-bottom: 10px;
   font-weight: 700;
 }
-.el-timeline-item {
-}
+
 .el-card {
   background-color: #1e1c34;
   border: 1px solid #1e1c34;

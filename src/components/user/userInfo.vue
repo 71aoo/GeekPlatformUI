@@ -39,10 +39,10 @@
           <el-input placeholder="个性签名" v-model="newInfo.motto"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="真实姓名" v-model="newInfo.realName"></el-input>
+          <el-input placeholder="真实姓名" v-model="newInfo.name"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="学号" v-model="newInfo.studentId"></el-input>
+          <el-input placeholder="学号" v-model="newInfo.number"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -62,10 +62,10 @@ export default {
       changeUserInfoVisible: false,
       userInfo: {},
       newInfo: {
-        motto: getUserInfo().motto,
-        realName: getUserInfo().realName,
-        studentId: getUserInfo().studentId,
-        headerImg: getUserInfo().headerImg,
+        motto: '',
+        name: '',
+        number: '',
+        header_img: '',
       },
       
     };
@@ -91,11 +91,10 @@ export default {
     },
     changeInfo() {
       changeUserInfo(this.newInfo).then((res) => {
+        console.log(res)
         if (res.status == 200) {
           this.userInfo = res.data;
-
           setUserInfo(res.data);
-
           this.changeUserInfoVisible = false;
           this.$notify({
             title: "成功",
@@ -113,6 +112,10 @@ export default {
   },
   mounted() {
     this.userInfo = getUserInfo();
+    this.newInfo.header_img = getUserInfo().headerImg;
+    this.newInfo.motto = getUserInfo().motto;
+    this.newInfo.number = getUserInfo().studentId;
+    this.newInfo.name = getUserInfo().realName
   },
 };
 </script>
