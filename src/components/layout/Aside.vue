@@ -126,7 +126,10 @@ export default {
     // 获取题目分类
     getAllCategory() {
       GetCategorie().then((response) => {
+        console.log(response.data)
         this.Challenge = response.data;
+        
+        this.$store.commit("changeCategories", response.data);
       });
     },
 

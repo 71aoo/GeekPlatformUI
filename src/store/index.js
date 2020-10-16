@@ -13,6 +13,9 @@ const store = new Vuex.Store({
 
         // 是否加入队伍
         isInTeam: getInTeam(),
+        
+        // 题目标签
+        categories: []
 
     },
     mutations: {
@@ -28,6 +31,22 @@ const store = new Vuex.Store({
 
             setInTeam(teamState)
             state.isInTeam = teamState
+        },
+
+        changeCategories(state, categories){
+
+            let chartCate = [];
+
+            for(let i = 0; i < categories.length; i++){
+
+                let item = {};
+                item.text = categories[i].name
+                item.max = categories[i].count
+                chartCate.push(item)
+
+            }
+
+            state.categories = chartCate
         }
     },
     actions: {},

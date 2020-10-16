@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     teamDetail(row, event, column) {
-      console.log(row, event, column);
+      console.log(row);
     },
 
     getAllTeamsList() {

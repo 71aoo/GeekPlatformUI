@@ -30,3 +30,23 @@ export function SubmitFlag(data) {
     })
 }
 
+
+// 获取队伍已解题目
+export function GetTeamSolvedChallenges(data){
+    return Request.request({
+        method: "get",
+        url: "/solve/team/challenge?teamID=" + data,
+    
+    })
+}
+
+
+// 获取用户已解题目
+export function GetUserSolvedChallenges(data){
+    return Request.request({
+        method: "get",
+        url: "/solve/user/challenge?userID=" + data,
+    
+    })
+}
+

@@ -65,7 +65,7 @@ const routes = [
         component: () => import("../views/leaderboard/leaderboard.vue")
       },
       {
-        path: '/userDetail',
+        path: '/userDetail/:id',
         name: 'userDetail',
         component: () => import("../views/user/userDetail")
       },

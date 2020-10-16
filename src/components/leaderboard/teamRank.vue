@@ -5,7 +5,12 @@
     </el-table-column>
     <el-table-column prop="name" label="队伍名" width="300">
       <template slot-scope="scope">
-        <img :src="scope.row.headerImg" width="40" height="40" class="head_pic" />
+        <img
+          :src="scope.row.headerImg"
+          width="40"
+          height="40"
+          class="head_pic"
+        />
         <span class="team_name">{{ scope.row.name }}</span>
       </template>
     </el-table-column>
@@ -51,8 +56,11 @@ export default {
   },
   methods: {
     teamDetail(row, event, column) {
-      // console.log(row, event, column);
-      console.log(row);
+      // // console.log(row, event, column);
+      // console.log(row);
+
+      this.$router.push("teamDetail/" + row.id)
+      
     },
 
     getTeamScoreboard() {

@@ -35,7 +35,9 @@ export default {
   methods: {
     // 获取解题数据
     userDetail(row, event, column) {
-      console.log(row, event, column);
+
+      // this.$router.push("/userDetail/" + row.id)
+      // console.log(row.id);
     },
 
     // 获取user积分榜

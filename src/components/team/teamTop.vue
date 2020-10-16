@@ -3,24 +3,24 @@
     <el-col :span="7">
       <div class="user_container">
         <el-row>
-          <el-col :span="12">
+          <el-col :span="12" v-if="teamInfo.memberOne">
             <el-tooltip
               class="user_avatar"
               effect="dark"
-              content="Bottom Center 提示文字"
+              :content="teamInfo.memberOne.username"
               placement="bottom"
             >
-              <el-avatar :size="60" :src="imageUrl"></el-avatar>
+              <el-avatar :size="60" :src="teamInfo.memberOne.headerImg"></el-avatar>
             </el-tooltip>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" v-if="teamInfo.memberTwo">
             <el-tooltip
               class="user_avatar"
               effect="dark"
-              content="Bottom Center 提示文字"
+              :content="teamInfo.memberTwo.username"
               placement="bottom"
             >
-              <el-avatar :size="60" :src="imageUrl"></el-avatar>
+              <el-avatar :size="60" :src="teamInfo.memberTwo.headerImg"></el-avatar>
             </el-tooltip>
           </el-col>
         </el-row>
@@ -28,13 +28,13 @@
     </el-col>
     <el-col :span="8">
       <div class="avatar_container">
-        <el-avatar :size="400" :src="imageUrl"></el-avatar>
+        <el-avatar :size="400" :src="teamInfo.headerImg"></el-avatar>
       </div>
     </el-col>
     <el-col :span="8">
       <div class="info_container">
-        <h2 class="team_name">胜利女神在微笑</h2>
-        <span class="team_motto">你腼腆的笑容是这故事的开始</span>
+        <h2 class="team_name">{{ teamInfo.name }}</h2>
+        <span class="team_motto">{{ teamInfo. motto }}</span>
       </div>
     </el-col>
   </el-row>
@@ -42,25 +42,15 @@
 
 <script>
 export default {
+  props: {
+    teamInfo: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
-      indicator: [
-        { text: "品牌", max: 100 },
-        { text: "内容", max: 100 },
-        { text: "可用性", max: 100 },
-        { text: "功能", max: 100 },
-      ],
-      userList: [
-        {
-          src:
-            "http://file.qqtouxiang.com/keai/2020-07-01/b7c14d159755baaf0057ba9cf77eb720.jpeg",
-          username: "王小虎",
-          motto: "胜利女神在微笑",
-          team: "上海市普陀区金沙江路 1518 弄",
-        },
-      ],
-      imageUrl:
-        "http://file.qqtouxiang.com/keai/2020-07-01/b7c14d159755baaf0057ba9cf77eb720.jpeg",
     };
   },
 };

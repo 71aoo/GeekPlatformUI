@@ -1,12 +1,12 @@
 <template>
   <div class="detail_container">
-   <TeamTop :TeamInfo="teamInfo"></TeamTop>
+    <TeamTop :teamInfo="teamInfo"></TeamTop>
     <el-divider content-position="left">个人数据</el-divider>
     <el-row>
-      <el-col :span="12">
+      <el-col :span="12" v-if="PieChartVisible">
         <PieChart :data="data"></PieChart>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="12" v-if="RadarChartVisible">
         <RadarChart :indicator="indicator" :value="value"></RadarChart>
       </el-col>
     </el-row>
@@ -21,62 +21,126 @@
 import PieChart from "../../components/chart/pieChart";
 import RadarChart from "../../components/chart/radarChart";
 import SolveList from "../../components/others/solveList";
-import TeamTop from "../../components/team/teamTop"
+import TeamTop from "../../components/team/teamTop";
+import { getTeamInfo } from "../../api/team";
+import {
+  GetTeamSolvedChallenges,
+  GetUserSolvedChallenges,
+} from "../../api/challenge";
 export default {
   name: "userDetail",
   components: {
     PieChart,
     RadarChart,
     SolveList,
-    TeamTop
+    TeamTop,
   },
   data() {
     return {
-       // radar data
-      value: [60, 73, 85, 40],
-      indicator: [
-        { text: "品牌", max: 100 },
-        { text: "内容", max: 100 },
-        { text: "可用性", max: 100 },
-        { text: "功能", max: 100 },
-      ],
+      // radar data
+      value: [],
+      indicator: this.$store.state.categories,
       // pieChart
-      data: [
-        { value: 335, name: "直接访问" },
-        { value: 310, name: "邮件营销" },
-        { value: 234, name: "联盟广告" },
-        { value: 135, name: "视频广告" },
-        { value: 1548, name: "搜索引擎" },
-      ],
+      data: [],
       // solveList
-      solveList: [
-        {
-          name: "还可以",
-          score: 60,
-          author: "chall",
-          data: "2020-09-10 10:21:10",
-        },
-      ],
-      teamInfo: [
-        {
-          src:
-            "http://file.qqtouxiang.com/keai/2020-07-01/b7c14d159755baaf0057ba9cf77eb720.jpeg",
-          username: "王小虎",
-          motto: "胜利女神在微笑",
-          team: "上海市普陀区金沙江路 1518 弄",
-        },
-      ],
-      imageUrl:
-        "http://file.qqtouxiang.com/keai/2020-07-01/b7c14d159755baaf0057ba9cf77eb720.jpeg",
+      solveList: [],
+      teamInfo: {},
+      RadarChartVisible: false,
+      PieChartVisible: false,
     };
   },
-  mounted(){
+  mounted() {
+    // console.log(this.$router)
 
+    // console.log(this.$store.state.categories)
+    // console.log(this.$route.params.id)
+    this.getTeamInfoByID(this.$route.params.id);
+    this.getTeamSolvedChallenges(this.$route.params.id);
   },
-  methods:{
+  methods: {
+    getTeamInfoByID(id) {
+      getTeamInfo(id).then((res) => {
+        if (res.status == 200) {
+          this.teamInfo = res.data;
+        }
+      });
+    },
+    getTeamSolvedChallenges(id) {
+      GetTeamSolvedChallenges(id).then((res) => {
+        // console.log(res)
+        if (res.status == 200) {
+          this.solveList = res.data;
+          // this.formatCategoryCount(res.data);
+          let cate = []; // [ cate, cate,..]
+          let cateCount = {}; // {cate: num}
+          let list = res.data;
+          for (let i = 0; i < list.length; i++) {
+            let key = list[i].category.name;
 
-    
-  }
+            if (cate.includes(key)) {
+              cateCount[key] += 1;
+            } else {
+              // 记录改分类
+              cate.push(key);
+              // 初始值 1
+              cateCount[key] = 1;
+            }
+          }
+
+          // value
+          let cateSort = this.$store.state.categories;
+          let v = [];
+          let num = 0;
+          for (let j in cateSort) {
+            if (
+              cateCount[cateSort[j].text] != null &&
+              cateCount[cateSort[j].text] != ""
+            ) {
+              v.push(cateCount[cateSort[j].text]);
+            } else {
+              num += 1;
+              v.push(0);
+            }
+          }
+
+          this.value = v;
+          // console.log(num);
+          this.RadarChartVisible = true;
+
+          let d = [];
+          for (let k in cateCount) {
+            let item = {};
+            item.name = k;
+            item.value = cateCount[k];
+            d.push(item);
+          }
+          // console.log(d);
+          if (d.length != 0 ) {
+            this.data = d;
+            // console.log(d);
+            this.PieChartVisible = true;
+          }else{
+            let item = {};
+            item.name = "....";
+            item.value = 1;
+            d.push(item)
+            this.data = d;
+            console.log(d);
+            this.PieChartVisible = true;
+          }
+        }
+      });
+    },
+  },
+  watch: {
+    $route(to, from) {
+      // console.log(this.$route.params.id);
+    },
+    solveList(newVal, oldVal) {
+      // console.log(newVal);
+    },
+  },
+  computed: {},
 };
 </script>
 
@@ -106,8 +170,8 @@ export default {
   display: table-cell;
 }
 
-.el-col{
-    padding: 10px;
+.el-col {
+  padding: 10px;
 }
 .user_name {
   color: #fff;
