@@ -4,7 +4,7 @@
     <ul>
       <li>
         <p>
-          本届极客大挑战由<a class="qax-yjy" target="view_window" href="https://research.qianxin.com/">奇安信技术研究院</a>特别赞助，由三叶草安全技术小组提供全部技术支持。
+          本届极客大挑战由<a class="qax-yjy" target="view_window" href="https://research.qianxin.com/">奇安信技术研究院</a>特别赞助，由三叶草安全技术小组主办，负责所有的赛题开发和平台维护。
         </p>
       </li>
       <li>

@@ -4,13 +4,20 @@
     <el-row>
       <el-col :offset="6" :span="6">
         <el-upload
+          ref="upload"
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="/api/upload/user"
+          accept="image/png,image/jpg,image/jpeg"
+          :auto-upload="true"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="userInfo.headerImg" :src="userInfo.headerImg" class="avatar" />
+          <img
+            v-if="userInfo.headerImg"
+            :src="userInfo.headerImg"
+            class="avatar"
+          />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-col>
@@ -62,36 +69,51 @@ export default {
       changeUserInfoVisible: false,
       userInfo: {},
       newInfo: {
-        motto: '',
-        name: '',
-        number: '',
-        header_img: '',
+        motto: "",
+        name: "",
+        number: "",
+        header_img: "",
       },
-      
     };
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      // this.imageUrl = URL.createObjectURL(file.raw);
+      // console.log(res);
+      // console.log(URL.createObjectURL(file.raw));
+      if (res.status == 200) {
+        this.userInfo = res.data;
+        setUserInfo(res.data);
+        this.$refs.upload.clearFiles();
+        this.$notify({
+          title: "头像修改成功",
+          message: "",
+          type: "success",
+        });
+        setTimeout((res) => {
+          this.$router.go(0);
+        }, 500);
+      }
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
+      const isPNG = file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+      if (!isJPG && !isPNG) {
+        this.$message.error("上传头像图片只能是 JPG 和 PNG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
-      return isJPG && isLt2M;
+      return (isJPG || isPNG) && isLt2M;
     },
     openChange() {
       this.changeUserInfoVisible = true;
     },
     changeInfo() {
       changeUserInfo(this.newInfo).then((res) => {
-        console.log(res)
+        // console.log(res);
         if (res.status == 200) {
           this.userInfo = res.data;
           setUserInfo(res.data);
@@ -115,7 +137,7 @@ export default {
     this.newInfo.header_img = getUserInfo().headerImg;
     this.newInfo.motto = getUserInfo().motto;
     this.newInfo.number = getUserInfo().studentId;
-    this.newInfo.name = getUserInfo().realName
+    this.newInfo.name = getUserInfo().realName;
   },
 };
 </script>

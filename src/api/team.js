@@ -41,3 +41,12 @@ export function getMyTeamInfo() {
         url: "/team/getData",
     })
 }
+
+// 修改队伍信息
+export function changeTeamInfo(data) {
+    return Request.request({
+        method: "post",
+        url: "/team/update",
+        data
+    })
+}

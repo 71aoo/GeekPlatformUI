@@ -33,13 +33,20 @@
       </el-form-item>
     </el-form>
   </div>
+  <div v-else>
+    <Index></Index>
+  </div>
 </template>
 
 <script>
+import Index from '../index/index'
 import Request from "../../util/request";
 import { setIsLogin } from "../../util/cacheProcessing";
 export default {
   name: "login",
+  components:{
+    Index
+  },
   props: ["isLogin"],
   data() {
     return {
@@ -79,7 +86,6 @@ export default {
         if (valid) {
           Request.post("/login", this.loginForm)
             .then((res) => {
-              console.log(res);
               if (res.status == 200) {
                 this.$store.commit("changeLoginState", true);
                 this.$notify({
