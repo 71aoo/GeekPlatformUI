@@ -15,6 +15,11 @@ const routes = [
     component: () => import("../views/Layout.vue"),
     children: [
       {
+        path: '/',
+        name: 'Index',
+        component: () => import("../components/index/index.vue")
+      },
+      {
         path: '/login',
         name: 'login',
         component: () => import("../components/login/login.vue")

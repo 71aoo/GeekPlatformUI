@@ -14,6 +14,7 @@
         </el-card>
       </el-timeline-item>
     </el-timeline>
+  
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
       console.log("rout")
       console.log(to)
       console.log(from)
-      this.$router.go(0);
+      // this.$router.go(0);
     },
   },
 };
@@ -54,7 +55,7 @@ export default {
 .an_container {
   margin: auto;
   width: 50%;
-  text-align: center
+  /* text-align: center */
 }
 
 .title {

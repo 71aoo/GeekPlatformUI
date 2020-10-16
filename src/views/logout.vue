@@ -15,14 +15,18 @@ import { Logout } from "../api/user";
 export default {
   name: "logout",
   mounted() {
-      console.log("dddd")
+    console.log("dddd")
     Logout().then((res) => {
-        console.log(res)
-      if (res != null) {
+      if (res.status == 200) {
         this.$store.commit("changeLoginState", false);
         this.$store.commit("changeTeamState", false);
         removeUserInfo();
         removeTeamInfo();
+        this.$notify({
+            title: "注销成功",
+            message: "",
+            type: "success",
+          });
         this.$route.push('/login')
       }
     });

@@ -20,14 +20,14 @@ const store = new Vuex.Store({
         // 改变登录状态
         changeLoginState(state, loginState) {
             setIsLogin(loginState)
-            // state.isLogin = loginState;
+            state.isLogin = loginState;
         },
 
         // 该变队伍状态
         changeTeamState(state, teamState) {
 
             setInTeam(teamState)
-            // state.isInTeam = teamState
+            state.isInTeam = teamState
         }
     },
     actions: {},
