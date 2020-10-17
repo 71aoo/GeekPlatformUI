@@ -3,7 +3,7 @@
     <div class="logo_container">
       <img
         class="logo"
-        src="https://geekplateform.oss-cn-beijing.aliyuncs.com/logo.png"
+        src="https://geekplateform.oss-cn-beijing.aliyuncs.com/logo.png?x-oss-process=image/auto-orient,1/quality,q_67"
         alt=""
       />
     </div>

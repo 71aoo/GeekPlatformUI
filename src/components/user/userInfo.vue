@@ -90,9 +90,9 @@ export default {
           message: "",
           type: "success",
         });
-        setTimeout((res) => {
-          this.$router.go(0);
-        }, 500);
+        // setTimeout((res) => {
+        //   this.$router.go(0);
+        // }, 500);
       }
     },
     beforeAvatarUpload(file) {

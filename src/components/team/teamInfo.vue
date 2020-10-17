@@ -38,7 +38,7 @@
             <h1 class="team-name">{{ teamInfo.name }}</h1>
           </div>
           <div class="right-info" @click="changeInfoVisible">
-            <h1 class="team-motto">{{ teamInfo.motto }}</h1>
+            <h1 class="team-motto" title="点击修改">{{ teamInfo.motto }}</h1>
           </div>
           <div class="right-info">
             <h1 class="team-token">{{ teamInfo.token }}</h1>
@@ -57,9 +57,9 @@
     </el-dialog>
 
     <!-- create -->
-    <el-dialog :visible.sync="createVisible" width="50%">
+    <el-dialog :visible.sync="createVisible" width="30%">
       <el-row>
-        <el-col :span="8">
+        <!-- <el-col :span="8">
           <el-upload
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -70,14 +70,14 @@
             <img v-if="newTeam.img" :src="newTeam.img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
-        </el-col>
-        <el-col :span="16">
+        </el-col> -->
+        <!-- <el-col :span="16"> -->
           <el-input
             v-model="newTeam.teamName"
             placeholder="队伍名称"
           ></el-input>
           <el-input v-model="newTeam.motto" placeholder="个性签名"></el-input>
-        </el-col>
+        <!-- </el-col> -->
       </el-row>
 
       <span slot="footer" class="dialog-footer">
@@ -94,7 +94,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="changeUserInfoVisible = false">取 消</el-button>
+        <el-button @click="changeTeamInfoVisible = false">取 消</el-button>
         <el-button type="primary" @click="changeInfo">修改</el-button>
       </span>
     </el-dialog>
@@ -161,10 +161,9 @@ export default {
           message: "",
           type: "success",
         });
-
-        setTimeout((res) => {
-          this.$router.go(0);
-        }, 500);
+        // setTimeout((res) => {
+        //   this.$router.go(0);
+        // }, 500);
       } else {
         this.$notify.error({
           title: res.msg,
@@ -188,12 +187,15 @@ export default {
 
     getInTeamInfo() {
       let inTeam = getInTeam();
-
-      if (inTeam != null && inTeam != false && inTeam != '' && inTeam == true) {
+      
+      if (inTeam != null && inTeam != false && inTeam != '' && inTeam == "true") {
+        console.log("inteam")
+        this.isInTeam = true
         getMyTeamInfo().then((res) => {
           if (res.status == 200) {
             // console.log(res);
             this.teamInfo = res.data;
+            
           }
         });
       } else {
@@ -234,6 +236,8 @@ export default {
           setInTeam(true);
           this.teamInfo = res.data;
           setTeamInfo(res.data);
+          this.inTeam = true
+          setInTeam(true)
           this.$notify({
             title: "成功",
             message: res.msg,
