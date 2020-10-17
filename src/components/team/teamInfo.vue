@@ -118,7 +118,7 @@ export default {
   data() {
     return {
       // 是否有队伍
-      isInTeam: true,
+      isInTeam: false,
 
       // 输入队伍token
       teamToken: {
@@ -189,15 +189,15 @@ export default {
     getInTeamInfo() {
       let inTeam = getInTeam();
 
-      if (inTeam == null || inTeam == false) {
-        this.isInTeam = false;
-      } else {
+      if (inTeam != null && inTeam != false && inTeam != '' && inTeam == true) {
         getMyTeamInfo().then((res) => {
           if (res.status == 200) {
             // console.log(res);
             this.teamInfo = res.data;
           }
         });
+      } else {
+        this.isInTeam = false;
       }
     },
     // 加入队伍
