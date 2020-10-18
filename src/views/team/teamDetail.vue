@@ -67,8 +67,11 @@ export default {
     },
     getTeamSolvedChallenges(id) {
       GetTeamSolvedChallenges(id).then((res) => {
-        // console.log(res)
+        console.log("dsds")
+        console.log(res)
+        
         if (res.status == 200) {
+          
           this.solveList = res.data;
           // this.formatCategoryCount(res.data);
           let cate = []; // [ cate, cate,..]

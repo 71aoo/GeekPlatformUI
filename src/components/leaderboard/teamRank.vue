@@ -5,12 +5,12 @@
     </el-table-column>
     <el-table-column prop="name" label="队伍名" width="300">
       <template slot-scope="scope">
-        <img
+        <!-- <img
           :src="scope.row.headerImg"
           width="40"
           height="40"
           class="head_pic"
-        />
+        /> -->
         <span class="team_name">{{ scope.row.name }}</span>
       </template>
     </el-table-column>
@@ -21,7 +21,7 @@
     ></el-table-column>
     <el-table-column label="成员" width="200">
       <template slot-scope="scope">
-        <img
+        <!-- <img
           v-if="scope.row.memberOne"
           :src="scope.row.memberOne.headerImg"
           :title="scope.row.memberOne.username"
@@ -36,7 +36,10 @@
           width="40"
           height="40"
           class="users_pic"
-        />
+        /> -->
+        <span v-if="scope.row.memberOne">{{ scope.row.memberOne.username }} </span>
+        <br>
+        <span  v-if="scope.row.memberTwo">{{ scope.row.memberTwo.username }} </span>
       </template>
     </el-table-column>
     <el-table-column prop="points" label="积分"></el-table-column>
@@ -59,9 +62,7 @@ export default {
     teamDetail(row, event, column) {
       // // console.log(row, event, column);
       // console.log(row);
-
       this.$router.push("teamDetail/" + row.id)
-      
     },
 
     getTeamScoreboard() {

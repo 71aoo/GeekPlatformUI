@@ -3,13 +3,13 @@
     <el-table-column prop="name" label="题目" sortable></el-table-column>
     <el-table-column prop="score" label="分数" sortable></el-table-column>
     <el-table-column prop="author.name" label="作者" sortable></el-table-column>
-    <el-table-column
+    <!-- <el-table-column
       prop="createdTime"
       :formatter="dataFormatter"
       label="提交时间"
       sortable
       
-    ></el-table-column>
+    ></el-table-column> -->
   </el-table>
 </template>
 
@@ -26,10 +26,10 @@ export default {
   },
   methods: {
     dataFormatter(row, column, cellValue, index) {
-      console.log(row);
+      // console.log(row);
       // console.log(column)
       const daterc = row["updatedTime"];
-      console.log(daterc);
+      // console.log(daterc);
       // let data = new Date(daterc)
       // return formateDate(date, 'YYYY-MM-dd hh:mm')
       let json_date = new Date(daterc).toJSON();

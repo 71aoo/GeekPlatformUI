@@ -9,12 +9,12 @@
     </el-table-column>
     <el-table-column prop="username" label="用户名" width="300">
       <template slot-scope="scope">
-        <img
+        <!-- <img
           :src="scope.row.headerImg"
           width="40"
           height="40"
           class="head_pic"
-        />
+        /> -->
         <span class="team_name">{{ scope.row.username }}</span>
       </template>
     </el-table-column>

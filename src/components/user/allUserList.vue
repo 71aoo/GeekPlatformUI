@@ -2,7 +2,7 @@
   <el-table :data="userList" style="width: 100%" @row-click="userDetail">
     <el-table-column prop="username" label="用户名" width="300">
       <template slot-scope="scope">
-        <img :src="scope.row.headerImg" width="40" height="40" class="head_pic" />
+        <!-- <img :src="scope.row.headerImg" width="40" height="40" class="head_pic" /> -->
         <span class="name">{{ scope.row.username }}</span>
       </template>
     </el-table-column>
