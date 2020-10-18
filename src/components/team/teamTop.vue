@@ -1,7 +1,9 @@
 <template>
   <el-row>
     <el-col :span="7">
+      <span class="score">{{ teamInfo.points }}</span>
       <div class="user_container">
+        
         <el-row>
           <el-col :span="12" v-if="teamInfo.memberOne">
             <el-tooltip
@@ -34,7 +36,7 @@
     <el-col :span="8">
       <div class="info_container">
         <h2 class="team_name">{{ teamInfo.name }}</h2>
-        <span class="team_motto">{{ teamInfo. motto }}</span>
+        <span class="team_motto">{{ teamInfo. motto }}</span> 
       </div>
     </el-col>
   </el-row>
@@ -94,5 +96,11 @@ export default {
 .team_motto {
   color: #fff;
   font-size: 1.3em;
+}
+
+.score{
+  color: antiquewhite;
+  font-size: 4em;
+  /* margin-top: 100px; */
 }
 </style>

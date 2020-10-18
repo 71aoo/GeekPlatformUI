@@ -25,7 +25,8 @@ module.exports = {
         proxy: {
             '/api': {
                 /* 目标代理服务器地址 */
-                target: 'http://game.sycsec.com/api/',
+                // target: 'http://game.sycsec.com/api/',
+                target: 'http://127.0.0.1:8080',
                 /* 允许跨域 */
                 changeOrigin: true,
                 pathRewrite: {

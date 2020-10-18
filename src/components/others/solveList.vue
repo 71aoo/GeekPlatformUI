@@ -1,15 +1,15 @@
 <template>
   <el-table :data="solveList" style="width: 100%" :default-sort = "{prop: 'createdTime', order: 'descending'}">
-    <el-table-column prop="name" label="题目" sortable></el-table-column>
-    <el-table-column prop="score" label="分数" sortable></el-table-column>
-    <el-table-column prop="author.name" label="作者" sortable></el-table-column>
-    <!-- <el-table-column
+    <el-table-column prop="challenge.name" label="题目" sortable></el-table-column>
+    <el-table-column prop="challenge.score" label="分数" sortable></el-table-column>
+    <el-table-column prop="challenge.author.name" label="作者" sortable></el-table-column>
+    <el-table-column
       prop="createdTime"
       :formatter="dataFormatter"
       label="提交时间"
       sortable
       
-    ></el-table-column> -->
+    ></el-table-column>
   </el-table>
 </template>
 

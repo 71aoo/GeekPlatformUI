@@ -51,9 +51,6 @@ export default {
   },
   mounted() {
     // console.log(this.$router)
-
-    // console.log(this.$store.state.categories)
-    // console.log(this.$route.params.id)
     this.getTeamInfoByID(this.$route.params.id);
     this.getTeamSolvedChallenges(this.$route.params.id);
   },
@@ -67,7 +64,7 @@ export default {
     },
     getTeamSolvedChallenges(id) {
       GetTeamSolvedChallenges(id).then((res) => {
-        console.log("dsds")
+        // console.log("dsds")
         console.log(res)
         
         if (res.status == 200) {
@@ -78,7 +75,7 @@ export default {
           let cateCount = {}; // {cate: num}
           let list = res.data;
           for (let i = 0; i < list.length; i++) {
-            let key = list[i].category.name;
+            let key = list[i].challenge.category.name;
 
             if (cate.includes(key)) {
               cateCount[key] += 1;
@@ -128,7 +125,7 @@ export default {
             item.value = 1;
             d.push(item)
             this.data = d;
-            console.log(d);
+            // console.log(d);
             this.PieChartVisible = true;
           }
         }
