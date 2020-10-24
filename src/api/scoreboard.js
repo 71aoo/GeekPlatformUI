@@ -1,15 +1,15 @@
 import Request from '../util/request'
 
-export function getUserBoard(){
+export function getUserBoard(data){
     return Request.request({
         method: "get",
-        url: "/scoreboard/user",
+        url: "/scoreboard/user?page=" + data,
     })
 }
 
-export function getTeamBoard(){
+export function getTeamBoard(data){
     return Request.request({
         method: "get",
-        url: "/scoreboard/team",
+        url: "/scoreboard/team?page=" + data,
     })
 }
